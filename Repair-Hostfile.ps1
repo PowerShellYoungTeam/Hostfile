@@ -27,11 +27,11 @@ Import-Csv -Path $infile -Header Computer | foreach-object {
 
         if($true -eq $MachineOnline){
   
-            $pathexist = Test-Path -Path \\$($Computer.DNSHostName)\c$\App\Version.txt  -ErrorAction Stop -PathType Leaf
+            $pathexist = Test-Path -Path "\\$($Computer.DNSHostName)\c$\App\Version.txt"  -ErrorAction Stop -PathType Leaf
 
             if($true -eq $pathexist){
 
-                $Version = Get-Content \\$($Computer.DNSHostName)\c$\App\Version.txt
+                $Version = Get-Content "\\$($Computer.DNSHostName)\c$\App\Version.txt"
 
             }else{
 
@@ -39,7 +39,7 @@ Import-Csv -Path $infile -Header Computer | foreach-object {
 
             }
 
-            $HostFilePath = \\$($Computer.DNSHostName)\$($HostFilePath)
+            $HostFilePath = "\\$($Computer.DNSHostName)\$($HostFilePath)"
 
 
             $HostfileModCheck =  compare-object (get-content $HostFilePath) (get-content $DefaultHostFile)
